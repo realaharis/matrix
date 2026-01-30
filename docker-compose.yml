@@ -1,0 +1,18 @@
+services:
+  synapse:
+    image: matrixdotorg/synapse:latest
+    container_name: synapse
+    volumes:
+      - ./data:/data
+    environment:
+      - SYNAPSE_SERVER_NAME=example.com
+      - SYNAPSE_REPORT_STATS=no
+    depends_on:
+      - postgres
+
+  postgres:
+    image: postgres:15
+    environment:
+      POSTGRES_USER=synapse
+      POSTGRES_PASSWORD=changeme
+      POSTGRES_DB=synapse
